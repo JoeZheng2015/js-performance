@@ -6,16 +6,17 @@ A simple javascript utility to measure performance
 Using `console.time` and `console.timeEnd` is tedious and may introduce extra time by invoking console.
 
 ## Usage
-The js-performance only provide two methods:
-- mark to mark the point
+The js-performance only provide three methods:
+- start to mark the start point
+- end to mark the end point
 - measure to log all mark message together
 
 ``` javascript
-import {mark, log} from 'js-performance'
+import {start, end, measure} from 'js-performance'
 
-mark('test')
+start('test')
 doWork(5000)
-mark('test')
+end('test')
 
 measure() // test: 5000ms
 ```
