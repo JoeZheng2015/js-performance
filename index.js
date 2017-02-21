@@ -33,6 +33,22 @@ function defaultLog(name, duration) {
     console.log(`${name}: ${duration}ms`)
 }
 
+function measureCRP() {
+    const timing = performance.timing
+    // dom 构建所用的时间
+    const interactive = timing.domInteractive - timing.domLoading
+    // dom 和 cssom 构建所用的时间
+    const dcl = timing.domContentLoadedEventStart - timing.domLoading
+    // 这个页面加载完（包括图片下载完毕）的时间
+    const complete = timing.domComplete - timing.domLoading
+
+    return  {
+        interactive,
+        dcl,
+        complete,
+    }
+}
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -52,6 +68,7 @@ function defaultLog(name, duration) {
         time,
         timeEnd,
         measure,
+        measureCRP,
     }
 
     return method;
