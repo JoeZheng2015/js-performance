@@ -23,12 +23,6 @@ function defaultLog(name, duration) {
     console.log(`${name}: ${duration}ms`)
 }
 
-const factory = {
-    start,
-    end,
-    measure,
-}
-
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -43,5 +37,12 @@ const factory = {
         root.returnExports = factory();
   }
 }(this, function () {
-    return factory;
+
+    const method = {
+        start,
+        end,
+        measure,
+    }
+
+    return method;
 }));
