@@ -1,10 +1,16 @@
 let entry = {}
 
-function start(name) {
-    entry[name] = [performance.now()]
+function time(name) {
+    if (!entry[name]) {
+        entry[name] = []
+    }
+    entry[name][0] = performance.now()
 }
 
-function end(name) {
+function timeEnd(name) {
+    if (!entry[name]) {
+        entry[name] = []
+    }
     entry[name][1] = performance.now()
 }
 
@@ -13,9 +19,13 @@ function measure(callback = defaultLog) {
 
     for(let i = 0; i < names.length; i++) {
         const name = names[i]
-        const [startTime, endTime = performance.now()] = entry[name]
-        const duration = endTime - startTime
-        callback(name, duration)
+        const [startTime = 0, endTime] = entry[name]
+
+        // only log those have endTime
+        if (endTime) {
+            const duration = endTime - startTime
+            callback(name, duration)
+        }
     }
 }
 
@@ -39,8 +49,8 @@ function defaultLog(name, duration) {
 }(this, function () {
 
     const method = {
-        start,
-        end,
+        time,
+        timeEnd,
         measure,
     }
 

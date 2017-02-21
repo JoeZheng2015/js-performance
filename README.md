@@ -7,16 +7,16 @@ Using `console.time` and `console.timeEnd` is tedious and may introduce extra ti
 
 ## Usage
 The js-performance only provide three methods:
-- start to mark the start point
-- end to mark the end point
+- time to mark the start point
+- timeEnd to mark the end point
 - measure to log all mark message together
 
 ``` javascript
-import {start, end, measure} from 'js-performance'
+import {time, timeEnd, measure} from 'js-performance'
 
-start('test')
+time('test')
 doWork(5000)
-end('test')
+timeEnd('test')
 
 measure() // test: 5000ms
 ```
