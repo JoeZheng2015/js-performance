@@ -23,20 +23,24 @@
         }
     }
 
-    function log(callback) {
+    function measure(callback = defaultLog) {
         const names = Object.keys(entry)
 
         for(let i = 0; i < names.length; i++) {
             const name = names[i]
             const [startTime, endTime = performance.now()] = entry[name]
-            const elapse = endTime - startTime
-            callback(name, elapse)
+            const duration = endTime - startTime
+            callback(name, duration)
         }
+    }
+
+    function defaultLog(name, duration) {
+        console.log(`${name}: ${duration}ms`)
     }
 
     const factory = {
         mark,
-        log,
+        measure,
     }
     return factory;
 }));
