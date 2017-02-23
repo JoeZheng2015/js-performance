@@ -49,6 +49,17 @@ function measureCRP() {
     }
 }
 
+function block(millisecond) {
+    if (millisecond <= 0) return
+
+    var now = performance.now()
+    const end = now + millisecond
+
+    while(now <= end) {
+        now = performance.now()
+    }
+}
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -69,6 +80,7 @@ function measureCRP() {
         timeEnd,
         measure,
         measureCRP,
+        block,
     }
 
     return method;
