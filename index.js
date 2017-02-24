@@ -33,7 +33,7 @@ function defaultLog(name, duration) {
     console.log(`${name}: ${duration}ms`)
 }
 
-function measureCRP() {
+function measureCRP(callback = defaultLog) {
     const timing = performance.timing
     // dom 构建所用的时间
     const interactive = timing.domInteractive - timing.domLoading
@@ -42,11 +42,25 @@ function measureCRP() {
     // 这个页面加载完（包括图片下载完毕）的时间
     const complete = timing.domComplete - timing.domLoading
 
-    return  {
-        interactive,
-        dcl,
-        complete,
-    }
+    const CRP = [
+        {
+            name: 'interactive',
+            duration: interactive,
+        },
+        {
+            name: 'domContentLoaded',
+            duration: dcl,
+        },
+        {
+            name: 'complete',
+            duration: complete,
+        }
+    ]
+
+    for (let i = 0; i < CRP.length; i++) {
+        const crp = CRP[i]
+        callback(crp.name, crp.duration)
+    }  
 }
 
 function block(millisecond) {
