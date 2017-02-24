@@ -6,17 +6,25 @@ A simple javascript utility to measure performance
 Using `console.time` and `console.timeEnd` is tedious and may introduce extra time by invoking console.
 
 ## Usage
-The js-performance only provide three methods:
 - time to mark the start point
 - timeEnd to mark the end point
-- measure to log all mark message together
+- log to log all mark message together
+- block to block js thread
 
 ``` javascript
-import {time, timeEnd, measure} from 'js-performance'
+import {time, timeEnd, log, block} from 'js-performance'
 
 time('test')
-doWork(5000)
+block(5000)
 timeEnd('test')
 
-measure() // test: 5000ms
+log() // test: 5000ms
+```
+
+- measureCRP to measure the CRP time including interactive, domContentLoaded and complete
+
+``` javascript
+import {measureCRP} from 'js-performance'
+
+measureCRP() // log your CRP time
 ```
