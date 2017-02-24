@@ -14,7 +14,7 @@ function timeEnd(name) {
     entry[name][1] = performance.now()
 }
 
-function measure(callback = defaultLog) {
+function log(callback = defaultLog) {
     const names = Object.keys(entry)
 
     for(let i = 0; i < names.length; i++) {
@@ -78,7 +78,7 @@ function block(millisecond) {
     const method = {
         time,
         timeEnd,
-        measure,
+        log,
         measureCRP,
         block,
     }
