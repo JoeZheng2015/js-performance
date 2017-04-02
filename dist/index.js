@@ -44,7 +44,7 @@ function log() {
 }
 
 function defaultLog(name, duration) {
-    console.log(name + ': ' + duration + 'ms');
+    console.log('%c' + name + ': ' + duration + 'ms', 'color:blue;');
 }
 
 function measureCRP() {

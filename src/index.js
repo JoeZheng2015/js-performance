@@ -30,7 +30,7 @@ function log(callback = defaultLog) {
 }
 
 function defaultLog(name, duration) {
-    console.log(`${name}: ${duration}ms`)
+    console.log(`%c${name}: ${duration}ms`, 'color:blue;')
 }
 
 function measureCRP(callback = defaultLog) {
