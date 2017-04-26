@@ -6,18 +6,22 @@
 
 let entry = {};
 
+function getNow() {
+    return typeof performance === 'undefined' ? Date.now() : performance.now()
+}
+
 function time(name) {
     if (!entry[name]) {
         entry[name] = [];
     }
-    entry[name][0] = performance.now();
+    entry[name][0] = getNow();
 }
 
 function timeEnd(name) {
     if (!entry[name]) {
         entry[name] = [];
     }
-    entry[name][1] = performance.now();
+    entry[name][1] = getNow();
 }
 
 function log(callback = defaultLog) {
@@ -72,11 +76,11 @@ function measureCRP(callback = defaultLog) {
 function block(millisecond) {
     if (millisecond <= 0) return
 
-    var now = performance.now();
+    var now = getNow();
     const end = now + millisecond;
 
     while(now <= end) {
-        now = performance.now();
+        now = getNow();
     }
 }
 
